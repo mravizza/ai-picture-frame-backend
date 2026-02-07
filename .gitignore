@@ -1,0 +1,7 @@
+config/config.local.php
+uploads/*
+!uploads/.htaccess
+.DS_Store
+Thumbs.db
+*.swp
+*.log

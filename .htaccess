@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Don't rewrite requests for real files inside public/
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]

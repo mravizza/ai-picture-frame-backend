@@ -1,0 +1,143 @@
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #1a1a1a;
+    background: #f5f5f5;
+}
+a { color: #2563eb; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Navigation ───────────────────────────────────────────── */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: #1e293b;
+    color: #fff;
+    padding: 0 1.5rem;
+    height: 56px;
+}
+.nav-brand { font-weight: 700; font-size: 1rem; white-space: nowrap; }
+.nav-links { display: flex; list-style: none; gap: 0.25rem; flex: 1; }
+.nav-links a {
+    color: #cbd5e1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+}
+.nav-links a:hover, .nav-links a.active { color: #fff; background: #334155; text-decoration: none; }
+.nav-user { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: #94a3b8; }
+
+/* ── Container ────────────────────────────────────────────── */
+.container { max-width: 1100px; margin: 1.5rem auto; padding: 0 1.5rem; }
+
+/* ── Cards ────────────────────────────────────────────────── */
+.card { background: #fff; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.card h2 { margin-bottom: 1rem; font-size: 1.125rem; }
+
+/* ── Alerts ───────────────────────────────────────────────── */
+.alert { padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.875rem; }
+.alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.5;
+    text-decoration: none;
+}
+.btn:hover { text-decoration: none; }
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-success { background: #16a34a; color: #fff; }
+.btn-success:hover { background: #15803d; }
+.btn-danger { background: #dc2626; color: #fff; }
+.btn-danger:hover { background: #b91c1c; }
+.btn-outline { background: transparent; color: #fff; border-color: #64748b; }
+.btn-outline:hover { background: #334155; }
+.btn-sm { padding: 0.25rem 0.625rem; font-size: 0.8125rem; }
+.btn-block { display: block; width: 100%; }
+
+/* ── Forms ────────────────────────────────────────────────── */
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-family: inherit;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.form-group textarea { min-height: 80px; resize: vertical; }
+.form-row { display: flex; gap: 1rem; }
+.form-row .form-group { flex: 1; }
+.form-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+/* ── Tables ───────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th, td { padding: 0.625rem 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+th { background: #f8fafc; font-weight: 600; white-space: nowrap; }
+tr:hover td { background: #f9fafb; }
+
+/* ── Status badges ────────────────────────────────────────── */
+.badge { display: inline-block; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 500; }
+.badge-active { background: #dcfce7; color: #166534; }
+.badge-inactive { background: #fee2e2; color: #991b1b; }
+
+/* ── Login Page ───────────────────────────────────────────── */
+.login-page { display: flex; align-items: center; justify-content: center; min-height: 80vh; }
+.login-box { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 380px; }
+.login-box h1 { margin-bottom: 1.5rem; font-size: 1.25rem; text-align: center; }
+
+/* ── Dashboard Grid ───────────────────────────────────────── */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-card { background: #fff; padding: 1.25rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.stat-card .stat-value { font-size: 1.75rem; font-weight: 700; color: #1e293b; }
+.stat-card .stat-label { font-size: 0.8125rem; color: #64748b; margin-top: 0.25rem; }
+
+/* ── Page Header ──────────────────────────────────────────── */
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.375rem; }
+
+/* ── Filters ──────────────────────────────────────────────── */
+.filter-bar { display: flex; gap: 0.75rem; align-items: end; margin-bottom: 1rem; flex-wrap: wrap; }
+.filter-bar .form-group { margin-bottom: 0; min-width: 150px; }
+
+/* ── Photo Grid ───────────────────────────────────────────── */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+.photo-card { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); background: #fff; }
+.photo-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.photo-card .photo-info { padding: 0.5rem; font-size: 0.75rem; color: #64748b; }
+
+/* ── Checkbox list ────────────────────────────────────────── */
+.checkbox-list { max-height: 200px; overflow-y: auto; border: 1px solid #d1d5db; border-radius: 6px; padding: 0.5rem; }
+.checkbox-list label { display: flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0; font-size: 0.875rem; cursor: pointer; }
+
+/* ── Utilities ────────────────────────────────────────────── */
+.text-muted { color: #64748b; }
+.text-sm { font-size: 0.8125rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
