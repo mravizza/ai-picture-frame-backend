@@ -7,6 +7,7 @@ use App\Csrf;
 use App\Models\Photo;
 use App\Models\Person;
 use App\Models\PersonPhoto;
+use App\ImageAnalyzer;
 
 class PhotoController
 {
@@ -105,6 +106,12 @@ class PhotoController
                 'checksum'          => $checksum,
                 'file_size'         => $size,
             ]);
+
+            // Analyze image with OpenAI Vision
+            $description = ImageAnalyzer::analyze($destPath, $mime);
+            if ($description !== null) {
+                Photo::updateDescription($photoId, $description);
+            }
 
             // Assign to persons
             foreach ($personIds as $pid) {

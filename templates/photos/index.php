@@ -38,6 +38,9 @@ unset($_SESSION['flash']);
                 <div class="photo-info">
                     <div><?= e($photo['original_filename']) ?></div>
                     <div><?= format_datetime($photo['created_at']) ?></div>
+                    <?php if (!empty($photo['description'])): ?>
+                        <div class="text-muted" style="font-size:0.85em;margin-top:0.25rem;"><?= e($photo['description']) ?></div>
+                    <?php endif; ?>
                     <?php if (!empty($photo['persons'])): ?>
                         <div>
                             <?php foreach ($photo['persons'] as $pp): ?>

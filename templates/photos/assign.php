@@ -13,6 +13,9 @@
             <p><strong>Dateiname:</strong> <?= e($photo['original_filename']) ?></p>
             <p><strong>Typ:</strong> <?= e($photo['mime']) ?></p>
             <p><strong>Hochgeladen:</strong> <?= format_datetime($photo['created_at']) ?></p>
+            <?php if (!empty($photo['description'])): ?>
+                <p><strong>Beschreibung:</strong> <?= e($photo['description']) ?></p>
+            <?php endif; ?>
 
             <form method="POST" action="<?= base_url('/admin/photos/assign') ?>" class="mt-2">
                 <?= csrf_field() ?>

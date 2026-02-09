@@ -20,12 +20,23 @@ use App\Controllers\Api\LogController as ApiLogController;
 
 // ── Serve uploaded files ──────────────────────────────────────
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if (preg_match('#^/uploads/([a-f0-9\-]+\.\w{3,4})$#', $requestPath, $m)) {
+// Strip base path prefix (e.g. /public) so /public/uploads/... also matches
+$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
+$basePath = ($scriptDir === '/' || $scriptDir === '\\') ? '' : $scriptDir;
+$cleanPath = $basePath && strpos($requestPath, $basePath) === 0
+    ? substr($requestPath, strlen($basePath)) ?: '/'
+    : $requestPath;
+if (preg_match('#^/uploads/([a-f0-9\-]+\.\w{3,4})$#', $cleanPath, $m)) {
     $filePath = ROOT_PATH . '/uploads/' . $m[1];
     if (is_file($filePath)) {
         $mime = mime_content_type($filePath);
         if (in_array($mime, config('allowed_mimes', []), true)) {
+            // Clean output buffers to avoid memory issues with large files
+            while (ob_get_level()) {
+                ob_end_clean();
+            }
             header('Content-Type: ' . $mime);
+            header('Content-Length: ' . filesize($filePath));
             header('Cache-Control: public, max-age=86400');
             readfile($filePath);
             exit;

@@ -11,4 +11,5 @@ return [
     'db_user' => 'senioren_user',
     'db_pass' => 'CHANGE_ME',
     'app_secret' => 'CHANGE_ME_TO_RANDOM_64_CHAR_HEX',
+    'openai_api_key' => 'sk-CHANGE_ME',
 ];

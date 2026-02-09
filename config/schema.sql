@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS photos (
     mime              VARCHAR(50)  NOT NULL,
     checksum          VARCHAR(64)  NOT NULL,
     file_size         INT UNSIGNED NOT NULL DEFAULT 0,
+    description       TEXT         DEFAULT NULL,
     created_at        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_photos_checksum (checksum),
     INDEX idx_photos_created (created_at)
@@ -97,10 +98,17 @@ CREATE TABLE IF NOT EXISTS logs (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================
--- SEED: default admin user (password: changeme)
--- Generate a proper hash with: php -r "echo password_hash('changeme', PASSWORD_BCRYPT);"
+-- SEED: default admin user
+-- ============================================================
+-- ============================================================
+-- MIGRATION: add description to photos
+-- ============================================================
+ALTER TABLE photos ADD COLUMN description TEXT DEFAULT NULL AFTER file_size;
+
+-- ============================================================
+-- SEED: default admin user
 -- ============================================================
 INSERT INTO admin_users (username, password) VALUES (
     'admin',
-    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+    '$2b$10$vG6P8hE5pvuKwyCfFyByqOMvTkpBL1AJIA9jSgQt3pMArEvGBdP52'
 ) ON DUPLICATE KEY UPDATE username = username;

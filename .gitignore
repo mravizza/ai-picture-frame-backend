@@ -5,3 +5,4 @@ uploads/*
 Thumbs.db
 *.swp
 *.log
+.ftp-credentials

@@ -24,11 +24,12 @@ class PhotoController
         $result = [];
         foreach ($photos as $p) {
             $result[] = [
-                'id'        => (int) $p['id'],
-                'url'       => $appUrl . '/uploads/' . $p['filename'],
-                'checksum'  => $p['checksum'],
-                'mime'      => $p['mime'],
-                'createdAt' => date('c', strtotime($p['created_at'])),
+                'id'          => (int) $p['id'],
+                'url'         => $appUrl . '/uploads/' . $p['filename'],
+                'checksum'    => $p['checksum'],
+                'mime'        => $p['mime'],
+                'description' => $p['description'] ?? null,
+                'createdAt'   => date('c', strtotime($p['created_at'])),
             ];
         }
 

@@ -56,8 +56,8 @@ class Photo
     {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare(
-            'INSERT INTO photos (filename, original_filename, mime, checksum, file_size)
-             VALUES (?, ?, ?, ?, ?)'
+            'INSERT INTO photos (filename, original_filename, mime, checksum, file_size, description)
+             VALUES (?, ?, ?, ?, ?, ?)'
         );
         $stmt->execute([
             $data['filename'],
@@ -65,8 +65,16 @@ class Photo
             $data['mime'],
             $data['checksum'],
             $data['file_size'],
+            $data['description'] ?? null,
         ]);
         return (int) $pdo->lastInsertId();
+    }
+
+    public static function updateDescription(int $id, ?string $description): bool
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare('UPDATE photos SET description = ? WHERE id = ?');
+        return $stmt->execute([$description, $id]);
     }
 
     public static function delete(int $id): bool
