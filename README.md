@@ -151,7 +151,7 @@ Akzeptanzkriterien:
 Akzeptanzkriterien:
 - [ ] Personenliste unter `/admin/persons` zeigt: ID, Vorname, Rolle/Beziehung, Gespraechslaenge, Sprache, Foto-Anzahl, Status (Aktiv/Inaktiv), Aktionen
 - [ ] Button "+ Neue Person" oeffnet Erstellformular
-- [ ] Formular enthaelt: Vorname (Pflicht), Rolle/Beziehung, Bevorzugte Anrede, Gespraechslaenge (Select: Kurz/Mittel/Lang, Default Mittel), Sprache (Select: Schweizer Hochdeutsch/Schweizerdeutsch Dialekt/Englisch, Default Hochdeutsch), Begruessung (Textarea), Themen (Textarea), Aktiv (Checkbox)
+- [ ] Formular enthaelt: Vorname (Pflicht), Rolle/Beziehung, Bevorzugte Anrede, Gespraechslaenge (Select: Kurz/Mittel/Lang, Default Mittel), Sprache (Select: Schweizer Hochdeutsch/Schweizerdeutsch Dialekt/Englisch, Default Hochdeutsch), Begruessung (Textarea), Interessen (Textarea), Aktiv (Checkbox)
 - [ ] Speichern ohne Vorname zeigt Fehlermeldung und Formular bleibt mit Eingaben erhalten
 - [ ] Erfolgreiche Erstellung zeigt Flash-Nachricht "Person erstellt." und leitet auf Liste
 - [ ] Bearbeiten laedt bestehende Werte ins Formular
@@ -253,7 +253,7 @@ Akzeptanzkriterien:
 Akzeptanzkriterien:
 - [ ] `GET /api/v1/persons` erfordert Bearer-Token
 - [ ] Nur aktive Personen (`aktiv = 1`) werden zurueckgegeben
-- [ ] Response-Felder pro Person: `id`, `vorname`, `rolleBeziehung`, `bevorzugteAnrede`, `greetingText`, `themen`, `gespraechslaenge`, `sprache`, `photoCount`
+- [ ] Response-Felder pro Person: `id`, `vorname`, `rolleBeziehung`, `bevorzugteAnrede`, `greetingText`, `interessen`, `gespraechslaenge`, `sprache`, `photoCount`
 - [ ] Response-Format ist JSON mit camelCase-Keys
 
 ---

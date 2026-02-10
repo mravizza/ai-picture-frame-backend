@@ -58,9 +58,9 @@
         </div>
 
         <div class="form-group">
-            <label for="themen">Themen</label>
+            <label for="themen">Interessen</label>
             <textarea id="themen" name="themen"
-                      placeholder="Gespraechsthemen (Freitext)"><?= e($person['themen'] ?? '') ?></textarea>
+                      placeholder="Interessen und Gespraechsthemen (Freitext)"><?= e($person['themen'] ?? '') ?></textarea>
         </div>
 
         <div class="form-group">

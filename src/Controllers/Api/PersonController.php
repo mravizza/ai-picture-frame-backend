@@ -22,7 +22,7 @@ class PersonController
                 'rolleBeziehung'    => $p['rolle_beziehung'],
                 'bevorzugteAnrede'  => $p['bevorzugte_anrede'],
                 'greetingText'      => $p['greeting_text'],
-                'themen'            => $p['themen'],
+                'interessen'        => $p['themen'],
                 'gespraechslaenge'  => $p['gespraechslaenge'],
                 'sprache'           => $p['sprache'],
                 'photoCount'        => (int) ($p['photo_count'] ?? 0),
