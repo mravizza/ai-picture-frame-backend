@@ -38,8 +38,21 @@ unset($_SESSION['flash']);
                 <div class="photo-info">
                     <div><?= e($photo['original_filename']) ?></div>
                     <div><?= format_datetime($photo['created_at']) ?></div>
+                    <?php if (!empty($photo['taken_at'])): ?>
+                        <div class="text-muted" style="font-size:0.85em;">Aufnahme: <?= format_datetime($photo['taken_at']) ?></div>
+                    <?php endif; ?>
                     <?php if (!empty($photo['description'])): ?>
                         <div class="text-muted" style="font-size:0.85em;margin-top:0.25rem;"><?= e($photo['description']) ?></div>
+                    <?php endif; ?>
+                    <?php if (!empty($photo['latitude']) && !empty($photo['longitude'])): ?>
+                        <?php
+                            $lat = (float) $photo['latitude'];
+                            $lng = (float) $photo['longitude'];
+                        ?>
+                        <div style="margin-top:0.35rem;">
+                            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=<?= $lng - 0.008 ?>,<?= $lat - 0.005 ?>,<?= $lng + 0.008 ?>,<?= $lat + 0.005 ?>&amp;layer=mapnik&amp;marker=<?= $lat ?>,<?= $lng ?>"
+                                    style="width:100%;height:120px;border:0;border-radius:4px;" loading="lazy"></iframe>
+                        </div>
                     <?php endif; ?>
                     <?php if (!empty($photo['persons'])): ?>
                         <div>

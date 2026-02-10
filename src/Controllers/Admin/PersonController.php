@@ -27,6 +27,7 @@ class PersonController
             'greeting_text' => '',
             'themen' => '',
             'gespraechslaenge' => 'mittel',
+            'sprache' => 'hochdeutsch',
             'aktiv' => 1,
         ];
         $isEdit = false;
@@ -116,6 +117,12 @@ class PersonController
             $gespraechslaenge = 'mittel';
         }
 
+        $allowedSprache = ['hochdeutsch', 'dialekt', 'englisch'];
+        $sprache = $_POST['sprache'] ?? 'hochdeutsch';
+        if (!in_array($sprache, $allowedSprache, true)) {
+            $sprache = 'hochdeutsch';
+        }
+
         return [
             'vorname'            => $vorname,
             'rolle_beziehung'    => trim($_POST['rolle_beziehung'] ?? ''),
@@ -123,6 +130,7 @@ class PersonController
             'greeting_text'      => trim($_POST['greeting_text'] ?? ''),
             'themen'             => trim($_POST['themen'] ?? ''),
             'gespraechslaenge'   => $gespraechslaenge,
+            'sprache'            => $sprache,
             'aktiv'              => isset($_POST['aktiv']),
         ];
     }

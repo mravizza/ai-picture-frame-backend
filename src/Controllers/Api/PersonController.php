@@ -24,6 +24,7 @@ class PersonController
                 'greetingText'      => $p['greeting_text'],
                 'themen'            => $p['themen'],
                 'gespraechslaenge'  => $p['gespraechslaenge'],
+                'sprache'           => $p['sprache'],
                 'photoCount'        => (int) ($p['photo_count'] ?? 0),
             ];
         }

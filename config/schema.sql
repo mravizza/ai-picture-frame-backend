@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS persons (
     greeting_text       TEXT         DEFAULT NULL,
     themen              TEXT         DEFAULT NULL,
     gespraechslaenge    ENUM('kurz','mittel','lang') NOT NULL DEFAULT 'mittel',
+    sprache             ENUM('hochdeutsch','dialekt','englisch') NOT NULL DEFAULT 'hochdeutsch',
     aktiv               TINYINT(1)   NOT NULL DEFAULT 1,
     created_at          DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at          DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -40,6 +41,9 @@ CREATE TABLE IF NOT EXISTS photos (
     checksum          VARCHAR(64)  NOT NULL,
     file_size         INT UNSIGNED NOT NULL DEFAULT 0,
     description       TEXT         DEFAULT NULL,
+    latitude          DECIMAL(10,7) DEFAULT NULL,
+    longitude         DECIMAL(10,7) DEFAULT NULL,
+    taken_at          DATETIME     DEFAULT NULL,
     created_at        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_photos_checksum (checksum),
     INDEX idx_photos_created (created_at)
@@ -104,6 +108,21 @@ CREATE TABLE IF NOT EXISTS logs (
 -- MIGRATION: add description to photos
 -- ============================================================
 ALTER TABLE photos ADD COLUMN description TEXT DEFAULT NULL AFTER file_size;
+
+-- ============================================================
+-- SEED: default admin user
+-- ============================================================
+-- ============================================================
+-- MIGRATION: add EXIF fields to photos
+-- ============================================================
+ALTER TABLE photos ADD COLUMN latitude DECIMAL(10,7) DEFAULT NULL AFTER description;
+ALTER TABLE photos ADD COLUMN longitude DECIMAL(10,7) DEFAULT NULL AFTER latitude;
+ALTER TABLE photos ADD COLUMN taken_at DATETIME DEFAULT NULL AFTER longitude;
+
+-- ============================================================
+-- MIGRATION: add sprache to persons
+-- ============================================================
+ALTER TABLE persons ADD COLUMN sprache ENUM('hochdeutsch','dialekt','englisch') NOT NULL DEFAULT 'hochdeutsch' AFTER gespraechslaenge;
 
 -- ============================================================
 -- SEED: default admin user

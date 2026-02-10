@@ -29,6 +29,9 @@ class PhotoController
                 'checksum'    => $p['checksum'],
                 'mime'        => $p['mime'],
                 'description' => $p['description'] ?? null,
+                'latitude'    => $p['latitude'] !== null ? (float) $p['latitude'] : null,
+                'longitude'   => $p['longitude'] !== null ? (float) $p['longitude'] : null,
+                'takenAt'     => $p['taken_at'] !== null ? date('c', strtotime($p['taken_at'])) : null,
                 'createdAt'   => date('c', strtotime($p['created_at'])),
             ];
         }

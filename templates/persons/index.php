@@ -21,6 +21,7 @@ unset($_SESSION['flash']);
                     <th>Vorname</th>
                     <th>Rolle/Beziehung</th>
                     <th>Gespraechslaenge</th>
+                    <th>Sprache</th>
                     <th>Fotos</th>
                     <th>Status</th>
                     <th>Aktionen</th>
@@ -28,7 +29,7 @@ unset($_SESSION['flash']);
             </thead>
             <tbody>
                 <?php if (empty($persons)): ?>
-                    <tr><td colspan="7" class="text-muted">Keine Personen vorhanden.</td></tr>
+                    <tr><td colspan="8" class="text-muted">Keine Personen vorhanden.</td></tr>
                 <?php else: ?>
                     <?php foreach ($persons as $p): ?>
                         <tr>
@@ -36,6 +37,7 @@ unset($_SESSION['flash']);
                             <td><strong><?= e($p['vorname']) ?></strong></td>
                             <td><?= e($p['rolle_beziehung']) ?></td>
                             <td><?= e($p['gespraechslaenge']) ?></td>
+                            <td><?= e($p['sprache'] ?? 'hochdeutsch') ?></td>
                             <td><?= (int) $p['photo_count'] ?></td>
                             <td>
                                 <?php if ($p['aktiv']): ?>

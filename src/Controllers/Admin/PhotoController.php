@@ -99,12 +99,17 @@ class PhotoController
                 continue;
             }
 
+            $exif = self::extractExifData($destPath, $mime);
+
             $photoId = Photo::create([
                 'filename'          => $filename,
                 'original_filename' => $originalName,
                 'mime'              => $mime,
                 'checksum'          => $checksum,
                 'file_size'         => $size,
+                'latitude'          => $exif['latitude'],
+                'longitude'         => $exif['longitude'],
+                'taken_at'          => $exif['taken_at'],
             ]);
 
             // Analyze image with OpenAI Vision
@@ -172,6 +177,68 @@ class PhotoController
         Photo::delete($id);
         $_SESSION['flash'] = 'Foto geloescht.';
         redirect('/admin/photos');
+    }
+
+    private static function extractExifData(string $filePath, string $mime): array
+    {
+        $result = ['latitude' => null, 'longitude' => null, 'taken_at' => null];
+
+        if ($mime !== 'image/jpeg') {
+            return $result;
+        }
+
+        try {
+            $exif = @exif_read_data($filePath, 'GPS,EXIF,IFD0', true);
+            if ($exif === false) {
+                return $result;
+            }
+
+            // Extract GPS coordinates
+            if (isset($exif['GPS']['GPSLatitude'], $exif['GPS']['GPSLatitudeRef'],
+                       $exif['GPS']['GPSLongitude'], $exif['GPS']['GPSLongitudeRef'])) {
+                $result['latitude'] = self::convertGps($exif['GPS']['GPSLatitude'], $exif['GPS']['GPSLatitudeRef']);
+                $result['longitude'] = self::convertGps($exif['GPS']['GPSLongitude'], $exif['GPS']['GPSLongitudeRef']);
+            }
+
+            // Extract date taken
+            $dateStr = $exif['EXIF']['DateTimeOriginal']
+                    ?? $exif['IFD0']['DateTime']
+                    ?? null;
+            if ($dateStr !== null) {
+                $dt = \DateTime::createFromFormat('Y:m:d H:i:s', $dateStr);
+                if ($dt !== false) {
+                    $result['taken_at'] = $dt->format('Y-m-d H:i:s');
+                }
+            }
+        } catch (\Throwable $e) {
+            // Silently ignore EXIF errors
+        }
+
+        return $result;
+    }
+
+    private static function convertGps(array $coordinate, string $ref): float
+    {
+        $degrees = self::evalRational($coordinate[0]);
+        $minutes = self::evalRational($coordinate[1]);
+        $seconds = self::evalRational($coordinate[2]);
+
+        $decimal = $degrees + ($minutes / 60) + ($seconds / 3600);
+
+        if ($ref === 'S' || $ref === 'W') {
+            $decimal *= -1;
+        }
+
+        return round($decimal, 7);
+    }
+
+    private static function evalRational(string $rational): float
+    {
+        $parts = explode('/', $rational);
+        if (count($parts) === 2 && (float) $parts[1] !== 0.0) {
+            return (float) $parts[0] / (float) $parts[1];
+        }
+        return (float) $parts[0];
     }
 
     private static function getExtension(string $mime): string

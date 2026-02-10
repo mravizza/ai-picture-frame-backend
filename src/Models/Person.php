@@ -30,8 +30,8 @@ class Person
     {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare(
-            'INSERT INTO persons (vorname, rolle_beziehung, bevorzugte_anrede, greeting_text, themen, gespraechslaenge, aktiv)
-             VALUES (?, ?, ?, ?, ?, ?, ?)'
+            'INSERT INTO persons (vorname, rolle_beziehung, bevorzugte_anrede, greeting_text, themen, gespraechslaenge, sprache, aktiv)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->execute([
             $data['vorname'],
@@ -40,6 +40,7 @@ class Person
             $data['greeting_text'] ?: null,
             $data['themen'] ?: null,
             $data['gespraechslaenge'] ?? 'mittel',
+            $data['sprache'] ?? 'hochdeutsch',
             isset($data['aktiv']) ? 1 : 0,
         ]);
         return (int) $pdo->lastInsertId();
@@ -49,7 +50,7 @@ class Person
     {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare(
-            'UPDATE persons SET vorname = ?, rolle_beziehung = ?, bevorzugte_anrede = ?, greeting_text = ?, themen = ?, gespraechslaenge = ?, aktiv = ?
+            'UPDATE persons SET vorname = ?, rolle_beziehung = ?, bevorzugte_anrede = ?, greeting_text = ?, themen = ?, gespraechslaenge = ?, sprache = ?, aktiv = ?
              WHERE id = ?'
         );
         return $stmt->execute([
@@ -59,6 +60,7 @@ class Person
             $data['greeting_text'] ?: null,
             $data['themen'] ?: null,
             $data['gespraechslaenge'] ?? 'mittel',
+            $data['sprache'] ?? 'hochdeutsch',
             isset($data['aktiv']) ? 1 : 0,
             $id,
         ]);

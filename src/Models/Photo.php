@@ -56,8 +56,8 @@ class Photo
     {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare(
-            'INSERT INTO photos (filename, original_filename, mime, checksum, file_size, description)
-             VALUES (?, ?, ?, ?, ?, ?)'
+            'INSERT INTO photos (filename, original_filename, mime, checksum, file_size, description, latitude, longitude, taken_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->execute([
             $data['filename'],
@@ -66,6 +66,9 @@ class Photo
             $data['checksum'],
             $data['file_size'],
             $data['description'] ?? null,
+            $data['latitude'] ?? null,
+            $data['longitude'] ?? null,
+            $data['taken_at'] ?? null,
         ]);
         return (int) $pdo->lastInsertId();
     }

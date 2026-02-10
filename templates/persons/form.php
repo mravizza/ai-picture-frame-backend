@@ -39,6 +39,16 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="sprache">Sprache</label>
+                <select id="sprache" name="sprache">
+                    <?php foreach (['hochdeutsch' => 'Schweizer Hochdeutsch', 'dialekt' => 'Schweizerdeutsch (Dialekt)', 'englisch' => 'Englisch'] as $val => $label): ?>
+                        <option value="<?= $val ?>" <?= ($person['sprache'] ?? 'hochdeutsch') === $val ? 'selected' : '' ?>>
+                            <?= $label ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
 
         <div class="form-group">
